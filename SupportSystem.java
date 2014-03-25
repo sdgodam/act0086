@@ -15,7 +15,7 @@ public class SupportSystem
 {
     private InputReader reader;
     private Responder responder;
-    
+
     /**
      * Creates a technical support system.
      */
@@ -45,8 +45,11 @@ public class SupportSystem
                 finished = true;
             }
             else {
-                String response = responder.generateResponse();
-                System.out.println(response);
+                if(responder.respuestas.containsKey(input)){
+                    System.out.println(responder.respuestas.get(input));
+                }else{
+                    String response = responder.generateResponse();
+                    System.out.println(response);}
             }
         }
         printGoodbye();

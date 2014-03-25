@@ -1,5 +1,5 @@
 import java.util.Random;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The responder class represents a response generator object.
@@ -11,20 +11,20 @@ import java.util.ArrayList;
 public class Responder
 {
     Random aleatorio;
-    ArrayList<String> respuestas;
+    HashMap<String,String> respuestas;
     /**
      * Construct a Responder - nothing to do
      */
     public Responder()
     {
         aleatorio = new Random();
-        respuestas = new ArrayList<>();
-        respuestas.add("That sounds interesting. Tell me more...");
-        respuestas.add("Can you explain me your problem?");
-        respuestas.add("Can you say me your network configuration?");
-        respuestas.add("I need more information...");
-        respuestas.add("What OS has your computer?");
-        respuestas.add("Has you install all the recommended security updates?");
+        respuestas = new HashMap<>();
+        respuestas.put("processor","That sounds interesting. Tell me more...");
+        respuestas.put("hello","Can you explain me your problem?");
+        respuestas.put("problem","Can you say me your network configuration?");
+        respuestas.put("dhcp","I need more information...");
+        respuestas.put("help","What OS has your computer?");
+        respuestas.put("windows","Has you install all the recommended security updates?");
     }
 
     /**
@@ -33,6 +33,19 @@ public class Responder
      */
     public String generateResponse()
     {
-        return respuestas.get(aleatorio.nextInt(respuestas.size()));
+        int numero = aleatorio.nextInt(respuestas.size());
+        String clave = "processor";
+        if (numero == 1){
+            clave = "hello";
+        }else if (numero == 2){
+            clave = "problem";
+        }else if (numero == 3){
+            clave = "dhcp";
+        }else if (numero == 4){
+            clave = "help";
+        }else if (numero == 5){
+            clave = "windows";
+        }
+        return respuestas.get(clave);
     }
 }
