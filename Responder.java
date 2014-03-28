@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 
 /**
  * The responder class represents a response generator object.
@@ -47,16 +46,10 @@ public class Responder
     public String generateResponse(HashSet<String> input)
     {
         String response = "";
-        boolean lookingFor = true;
-        //como HashSet tiene metodo iterator lo utilizo...
-        //así al poner 2 palabras clave me deuelve siempre lo mismo, preguntar a Miguel
-        //si es porque identifica la primera por su Hash y no por el orden
-        Iterator<String> it = input.iterator();
-        while(it.hasNext() && lookingFor){
-            String myElement = it.next();
-            if(respuestas.containsKey(myElement)){
-                response = respuestas.get(myElement);
-                lookingFor = false;
+       
+        for(String element : input){
+            if(respuestas.containsKey(element)){
+                response = respuestas.get(element);
             }else{
                 response = respuestasA.get(aleatorio.nextInt(respuestas.size()));
             }
