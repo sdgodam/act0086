@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class InputReader
 {
     private Scanner reader;
-
+    
     /**
      * Create a new InputReader that reads text from the text terminal.
      */
@@ -29,8 +29,8 @@ public class InputReader
     public String getInput()
     {
         System.out.print("> ");         // print prompt
-        String inputLine = reader.nextLine();
-
-        return inputLine;
+        //String inputLine = reader.nextLine();     lo que habia originalmente
+        String[] userEntry = reader.nextLine().split(" ",1);
+        return userEntry[0];
     }
 }
