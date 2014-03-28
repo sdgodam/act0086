@@ -45,15 +45,13 @@ public class SupportSystem
                 finished = true;
             }
             else {
-                if(responder.respuestas.containsKey(input)){
-                    System.out.println(responder.respuestas.get(input));
-                }else{
-                    String response = responder.generateResponse();
-                    System.out.println(response);}
+                String response = responder.generateResponse(input);
+                System.out.println(response);
             }
         }
         printGoodbye();
     }
+
 
     /**
      * Print a welcome message to the screen.
