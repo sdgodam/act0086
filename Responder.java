@@ -1,6 +1,8 @@
 import java.util.Random;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * The responder class represents a response generator object.
@@ -20,7 +22,7 @@ public class Responder
     public Responder()
     {
         aleatorio = new Random();
-        
+
         respuestas = new HashMap<>();
         respuestas.put("processor","That sounds interesting. Tell me more...");
         respuestas.put("hello","Can you explain me your problem?");
@@ -28,7 +30,7 @@ public class Responder
         respuestas.put("dhcp","I need more information...");
         respuestas.put("help","What OS has your computer?");
         respuestas.put("windows","Has you install all the recommended security updates?");
-       
+
         respuestasA = new ArrayList<>();
         respuestasA.add("That sounds interesting. Tell me more...");
         respuestasA.add("Can you explain me your problem?");
@@ -42,13 +44,22 @@ public class Responder
      * Generate a response.
      * @return   A string that should be displayed as the response
      */
-    public String generateResponse(String input)
+    public String generateResponse(HashSet<String> input)
     {
         String response = "";
-        if(respuestas.containsKey(input)){
-            response = respuestas.get(input);
-        }else{
-            response = respuestasA.get(aleatorio.nextInt(respuestas.size()));
+        boolean lookingFor = true;
+        //como HashSet tiene metodo iterator lo utilizo...
+        //así al poner 2 palabras clave me deuelve siempre lo mismo, preguntar a Miguel
+        //si es porque identifica la primera por su Hash y no por el orden
+        Iterator<String> it = input.iterator();
+        while(it.hasNext() && lookingFor){
+            String myElement = it.next();
+            if(respuestas.containsKey(myElement)){
+                response = respuestas.get(myElement);
+                lookingFor = false;
+            }else{
+                response = respuestasA.get(aleatorio.nextInt(respuestas.size()));
+            }
         }
         return response;
     }

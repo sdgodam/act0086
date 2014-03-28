@@ -26,11 +26,19 @@ public class InputReader
      *
      * @return  A String typed by the user.
      */
-    public String getInput()
+    public HashSet<String> getInput()
     {
         System.out.print("> ");         // print prompt
         //String inputLine = reader.nextLine();     lo que habia originalmente
-        String[] userEntry = reader.nextLine().split(" ",1);
-        return userEntry[0];
+        //String[] userEntry = reader.nextLine().split(" ",1); mi modificacion anterior
+        String inputLine = reader.nextLine();
+        String[] userEntryString = inputLine.split(" ");
+        
+        HashSet<String> userEntry = new HashSet<>();
+        for(String element : userEntryString){
+            element = element.trim().toLowerCase();
+            userEntry.add(element);
+        }
+        return userEntry;
     }
 }
