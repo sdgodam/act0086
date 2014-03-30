@@ -46,12 +46,17 @@ public class Responder
     public String generateResponse(HashSet<String> input)
     {
         String response = "";
-       
         for(String element : input){
             if(respuestas.containsKey(element)){
                 response = respuestas.get(element);
             }else{
-                response = respuestasA.get(aleatorio.nextInt(respuestas.size()));
+                if(respuestasA.size() != 0){
+                    int numAleatorio = aleatorio.nextInt(respuestasA.size());
+                    response = respuestasA.get(numAleatorio);
+                    respuestasA.remove(numAleatorio);
+                }else{
+                    response = "I dont understand what you are saying to me...";
+                }
             }
         }
         return response;
